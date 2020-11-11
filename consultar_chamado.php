@@ -5,7 +5,7 @@
   $chamados = array();
 
   //abrir arquivo.hd
-  $arquivo = fopen('arquivo.hd','r');
+  $arquivo = fopen('../../app_help_desk/arquivo.hd','r');
 
   //enquato houverem registros (linhas) a serem recuperados
   while(!feof($arquivo)){ //testa pelo fim do arquivo
@@ -13,12 +13,11 @@
     $registro = fgets($arquivo);//recupera a linha do arquivo
     $dados = explode('#', $registro);
     if($_SESSION['perfil_id'] == 2){
-      if($_SESSION['id'] !=$dados[0]){
+      if($_SESSION['id'] != $dados[0]){
         continue;
-      }else      {
-      $chamados[] = $dados;}
-
-
+      }else{
+      $chamados[] = $dados;
+    }
 
     }else{
     $chamados[] = $dados;
@@ -76,7 +75,7 @@
 
               <? foreach($chamados as $chamado_dados){ ?>
               <?php
-                if(count($chamado_dados) < 4){
+                if(count($chamado_dados) < 3){
                   continue;
                 }
               ?>
