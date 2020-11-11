@@ -39,10 +39,10 @@
             <div class="card-body">
               <form action="valida_login.php" method="post">
                 <div class="form-group">
-                  <input name="nome" type="email" class="form-control" placeholder="E-mail">
+                  <input name="email" type="email" class="form-control" placeholder="E-mail">
                 </div>
                 <div class="form-group">
-                  <input name= "login" type="password" class="form-control" placeholder="Senha">
+                  <input name= "senha" type="password" class="form-control" placeholder="Senha">
                 </div>
 
                 <?if(isset($_GET['login']) && $_GET['login'] == 'erro'){?>
