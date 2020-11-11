@@ -11,7 +11,18 @@
   while(!feof($arquivo)){ //testa pelo fim do arquivo
 
     $registro = fgets($arquivo);//recupera a linha do arquivo
-    $chamados[] = $registro;
+    $dados = explode('#', $registro);
+    if($_SESSION['perfil_id'] == 2){
+      if($_SESSION['id'] !=$dados[0]){
+        continue;
+      }else      {
+      $chamados[] = $dados;}
+
+
+
+    }else{
+    $chamados[] = $dados;
+    }
   }
 
   //fechando o arquivo.hd
@@ -63,18 +74,8 @@
             
             <div class="card-body">
 
-              <? foreach($chamados as $chamado){ ?>
-
-              <?
-                $chamado_dados = explode('#', $chamado);
-
-                if($_SESSION['perfil_id'] == 2){
-                  //apenas exibir se foi criado pelo mesmo usuario
-                  if($chamado_dados[0] != $_SESSION['id']){
-                    continue;
-                  }
-                }
-
+              <? foreach($chamados as $chamado_dados){ ?>
+              <?php
                 if(count($chamado_dados) < 4){
                   continue;
                 }
