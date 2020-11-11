@@ -1,4 +1,23 @@
 <? require_once "validador_acesso.php"?>
+<?php
+
+  //array de chamados
+  $chamados = array();
+
+  //abrir arquivo.hd
+  $arquivo = fopen('arquivo.hd','r');
+
+  //enquato houverem registros (linhas) a serem recuperados
+  while(!feof($arquivo)){ //testa pelo fim do arquivo
+
+    $registro = fgets($arquivo);//recupera a linha do arquivo
+    $chamados[] = $registro;
+  }
+
+  //fechando o arquivo.hd
+  fclose($arquivo);
+
+?>
 
 <html>
   <head>
@@ -43,24 +62,34 @@
             </div>
             
             <div class="card-body">
-              
+
+              <? foreach($chamados as $chamado){ ?>
+
+              <?
+                $chamado_dados = explode('#', $chamado);
+
+                if($_SESSION['perfil_id'] == 2){
+                  //apenas exibir se foi criado pelo mesmo usuario
+                  if($chamado_dados[0] != $_SESSION['id']){
+                    continue;
+                  }
+                }
+
+                if(count($chamado_dados) < 4){
+                  continue;
+                }
+              ?>
+
               <div class="card mb-3 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
+                  <h5 class="card-title"><?= $chamado_dados[1]?></h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><?= $chamado_dados[2]?></h6>
+                  <p class="card-text"><?= $chamado_dados[3]?></p>
 
                 </div>
               </div>
 
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
-                </div>
-              </div>
+               <? } ?>
 
               <div class="row mt-5">
                 <div class="col-6">
