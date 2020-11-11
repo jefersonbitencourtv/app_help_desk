@@ -1,5 +1,5 @@
 <?
-
+session_start();
 
 //Variavel para verificar se a autenticação foi realizada
 $usuario_autenticado = false;
@@ -19,18 +19,11 @@ foreach($usuarios_app as $user){
 
     if($usuario_autenticado){
         echo 'Usuário autenticado.';
-    }else{
+
+          $_SESSION['autenticado'] = 'SIM';
+    }else{  
+        $_SESSION['autenticado'] = 'NÃO';
         header('Location: index.php?login=erro');
-    }
-
-
-
-
-print_r($_POST);
-
-echo '<br />';
-echo $_POST['email'];
-echo '<br />';
-echo $_POST['senha'];
+      }
 
 ?>
