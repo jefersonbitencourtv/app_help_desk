@@ -1,5 +1,5 @@
 # app_help_desk
-
+O código permite para usuarios cadastrador abrir um chamado e consultar seu chamado. Para administradores permite ver todos os chamados abertos.
 Uso prático:
 Criar a pasta app_help_desk dentro do htdocs e colocar os arquivos dentro dela.
 
